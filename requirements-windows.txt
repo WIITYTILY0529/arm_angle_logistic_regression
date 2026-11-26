@@ -1,0 +1,12 @@
+# Windows dependencies: project metadata and direct imports.
+adjustText
+ipykernel
+matplotlib
+numpy
+pandas
+pandas<3
+pygam
+pytest
+scikit-learn
+scipy
+seaborn

@@ -1,0 +1,3 @@
+Usage rates are computed within each folder. In other words, the same pitcher is treated separately against left-handed and right-handed batters.
+
+Take the two pitch types with the largest h_std difference, multiply their h_std difference by usage rate * 10, and scatter that value as the dependent variable against arm angle as the explanatory variable.

@@ -1,0 +1,21 @@
+[project]
+name = "arm-angle-logistic-regression"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "adjustText",
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "pygam",
+  "scikit-learn",
+  "scipy",
+  "seaborn",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
