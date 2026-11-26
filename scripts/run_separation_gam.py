@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+from _paths import DATA_DIR, FIGURES_DIR
 from pygam import LinearGAM, s
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
@@ -38,7 +38,7 @@ def merge_csv_folder(folderpath):
     return df_merged
 
 # 2. Load and preprocess data
-BASE_PATH = str(PROJECT_ROOT / "data")
+BASE_PATH = str(DATA_DIR)
 FOLDERS = ["l_vs_l", "l_vs_r", "r_vs_l", "r_vs_r"]
 
 all_dfs = []
@@ -88,8 +88,8 @@ def prepare_gam_data(df_input):
     df_res['h_diff_std'] = (df_res['max_h_break_diff'] - df_res['max_h_break_diff'].mean()) / df_res['max_h_break_diff'].std()
     df_res['z_diff_std'] = (df_res['max_z_break_diff'] - df_res['max_z_break_diff'].mean()) / df_res['max_z_break_diff'].std()
     
-    # [Key] Apply softsign to z_std - h_std
-    # Positive: vertical separation dominates; negative: horizontal separation dominates
+    # [Key] Apply softsign to h_std - z_std
+    # Positive: horizontal separation dominates; negative: vertical separation dominates
     diff = df_res['h_diff_std'] - df_res['z_diff_std']
     df_res['separation_bias_softsign'] = diff / (1 + np.abs(diff))
     
@@ -139,10 +139,11 @@ plt.ylim(-1.1, 1.1)
 
 plt.title(f"Arm Angle vs Standardized Separation Bias (Softsign) | n={len(df_gam_ready)} | R²={float(r2_val):.3}", fontsize=14)
 plt.xlabel("Average Arm Angle (degrees)")
-plt.ylabel("Separation Bias (<- H-dominant | Z-dominant ->)")
+plt.ylabel("Separation Bias (<- Z-dominant | H-dominant ->)")
 plt.grid(alpha=0.3)
 plt.legend()
-plt.savefig('pngs/hzmaxdiffstdgam.png')
+(FIGURES_DIR / 'exploratory').mkdir(parents=True, exist_ok=True)
+plt.savefig(FIGURES_DIR / 'exploratory' / 'hzmaxdiffstdgam.png')
 plt.show()
 
 print(f"GAM analysis done. n={len(df_gam_ready)}, R2={r2_val:.4f}, p-value={p_value:.10f}")
