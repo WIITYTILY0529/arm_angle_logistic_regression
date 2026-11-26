@@ -62,10 +62,10 @@ An earlier approach in the report reduced the H and Z scores to one dimension wi
 | Logistic decision boundary | 38.62° | Poster; reproduced by `run_integrated_logistic.py` (38.6246°) |
 | Logistic accuracy (in-sample) | 0.677 | Poster; reproduced (0.6775) |
 | Separation-bias GAM pseudo-R² | 0.46, p < 0.0001 | Poster; reproduced by `run_separation_gam.py` (0.4643, n = 5,718) |
-| Movement-bias GAM pseudo-R² | 0.225, p < 0.0001 | Poster; see the note below |
+| Movement-bias GAM pseudo-R² | 0.225 in the poster text; 0.264 in the poster figure; p < 0.0001 | Poster; `run_softsign_gam.py` reproduces 0.264 (see the note below) |
 | PCA (earlier analysis) | PC1 loadings [0.71, −0.71], about 60% of variance; arm angle explains about 27% of PC1 | [`writing/reports/Report.docx`](writing/reports/Report.docx) |
 
-**Note on the movement-bias GAM:** the poster's 0.225 comes from softsign of the *standardized* H and Z scores (reproduced: 0.2246). The current `run_softsign_gam.py` applies softsign to the *raw* H − Z difference and reports a pseudo-R² of 0.264. The two numbers describe the same idea with different scaling.
+**Note on the movement-bias GAM:** the poster reports two different values for this model. Its text gives a pseudo-R² of 0.225, which comes from softsign of the *standardized* H and Z scores (reproduced: 0.2246). Its movement-bias figure shows R² = 0.264, which comes from softsign of the *raw* H − Z difference; this is what the current `run_softsign_gam.py` computes (reproduced: 0.2636). Both describe the same relationship with different scaling.
 
 Interpretation (from the poster):
 
